@@ -1,37 +1,19 @@
 import React, { useState } from 'react';
 import api from '../api'
+import user from './user';
+import phrase from './phrase';
 
 
 const Users = () => {
-    const [users, setUsers] = useState(api.users.fetchAll())
-    console.log(users)
-    const renderBadgeQualities = () => {
-            users.map((qualities) => {
-                return qualities.qualities.map((names) => {
-                    console.log(names)
-                }
-                    //  (
-                    //     <span className='badge bg-primary'>{names.name}</span>
-                    // )
-                );
-            })
-    }
+    const [ users, setUsers ] = useState(api.users.fetchAll());
 
-    const renderUsers = () => {
-        // renderBadgeQualities()
-        return users.map((user) => (
-            <tr key={user._id}>
-                <td scope="row" >{user.name}</td>
-                <td className='badge bg-primary'>{renderBadgeQualities()}</td>
-                <td>{user.profession.name}</td>
-                <td>{user.completedMeetings}</td>
-                <td>{user.rate}</td>
-            </tr>
-        ))
-    }
+    const handleDelete = (userId) => {
+        setUsers((prevState) => prevState.filter(item => item._id !== userId))
+    };
+
     return (
         <>
-        <h1>Users</h1>
+            <h1>{phrase(users.length)}</h1>
             <table className="table">
                 <thead>
                 <tr>
@@ -43,11 +25,11 @@ const Users = () => {
                 </tr>
                 </thead>
                 <tbody>
-                    {renderUsers()}
+                {user(users, handleDelete)}
                 </tbody>
             </table>
         </>
     )
-}
+};
 
 export default Users;
