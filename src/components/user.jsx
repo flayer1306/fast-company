@@ -10,7 +10,7 @@ const user = (array, callback) => {
                     <td>{user.profession.name}</td>
                     <td>{user.completedMeetings}</td>
                     <td>{user.rate}</td>
-                    <td><button className='btn btn-primary btn-sm m-2'
+                    <td><button className='btn btn-danger btn-sm m-2'
                                 onClick={() => callback(user._id)}
                     >Delete</button></td>
                 </tr>
