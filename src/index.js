@@ -4,11 +4,11 @@ import './index.css';
 import '/node_modules/bootstrap/dist/css/bootstrap.css'
 
 import reportWebVitals from './reportWebVitals';
-import Users from './components/users';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Users/>
+    <App/>
 );
 
 // If you want to start measuring performance in your app, pass a function
