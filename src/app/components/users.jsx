@@ -2,8 +2,7 @@ import React from 'react';
 import SearchStatus from './searchStatus';
 import User from './user';
 
-const Users = ({ users, ...onDelete }) => {
-
+const Users = ({ users, ...rest }) => {
     return (
         <>
             <h1>
@@ -20,6 +19,7 @@ const Users = ({ users, ...onDelete }) => {
                         <th scope="col">Профессия</th>
                         <th scope="col">Встретился, раз</th>
                         <th scope="col">Оценка</th>
+                        <th scope="col">Избранное</th>
                         <th/>
                     </tr>
                     </thead>
@@ -28,7 +28,7 @@ const Users = ({ users, ...onDelete }) => {
                         <User
                             key={user._id}
                             {...user}
-                            {...onDelete}
+                            {...rest}
                         />)}
                     </tbody>
                 </table>
