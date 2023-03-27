@@ -3,6 +3,8 @@ import SearchStatus from './searchStatus';
 import User from './user';
 import Pagination from './pagination';
 import paginate from '../utils/paginate';
+import GroupList from './groupList';
+import PropTypes from 'prop-types';
 
 const Users = ({ users, ...rest }) => {
     const count = users.length;
@@ -17,6 +19,7 @@ const Users = ({ users, ...rest }) => {
             <h1>
                 <SearchStatus users={users} />
             </h1>
+            <GroupList/>
             {count > 0 && (
                 <table className="table">
                     <thead>
@@ -45,6 +48,10 @@ const Users = ({ users, ...rest }) => {
             />
         </>
     );
+};
+
+Users.propTypes = {
+    users: PropTypes.array.isRequired
 };
 
 export default Users;
