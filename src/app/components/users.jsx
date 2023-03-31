@@ -1,25 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchStatus from './searchStatus';
 import User from './user';
 import Pagination from './pagination';
 import paginate from '../utils/paginate';
 import GroupList from './groupList';
 import PropTypes from 'prop-types';
+import api from '../api';
 
 const Users = ({ users, ...rest }) => {
     const count = users.length;
     const pageSize = 4;
     const [currentPage, setCurrentPage] = useState(1);
+    const [professions, setProfession] = useState();
+    const [selectedProf, setSelectedProf] = useState();
+    useEffect(() => {
+        api.professions
+            .fetchAll()
+            .then((data) =>
+                setProfession(data)
+            );
+    }, []);
+
+    const handleProfessionSelect = item => {
+        setSelectedProf(item);
+    };
+
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
     };
-    const userCrop = paginate(users, currentPage, pageSize);
+    const filteredUsers = selectedProf
+        ? users.filter((user) =>
+            user.profession === selectedProf)
+        : users;
+    const userCrop = paginate(filteredUsers, currentPage, pageSize);
+    const clearFilter = () => {
+        setSelectedProf();
+        setCurrentPage(1);
+    };
     return (
         <>
             <h1>
-                <SearchStatus users={users} />
+                <SearchStatus users={users}/>
             </h1>
-            <GroupList/>
+            {professions && (
+                <>
+                    <GroupList
+                        selectedItem={selectedProf}
+                        items={professions}
+                        onItemSelect={handleProfessionSelect}
+                        valueProperty='_id'
+                        contentProperty='name'
+                    />
+                    <button className='btn btn-secondary mt-2'
+                        onClick={clearFilter}
+                    >
+                        Очистить
+                    </button>
+                </>
+
+            )
+            }
             {count > 0 && (
                 <table className="table">
                     <thead>
@@ -30,7 +70,7 @@ const Users = ({ users, ...rest }) => {
                             <th scope="col">Встретился, раз</th>
                             <th scope="col">Оценка</th>
                             <th scope="col">Избранное</th>
-                            <th />
+                            <th/>
                         </tr>
                     </thead>
                     <tbody>

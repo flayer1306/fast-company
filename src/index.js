@@ -1,3 +1,5 @@
+/* eslint-disable import/no-absolute-path */
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
