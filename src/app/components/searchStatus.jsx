@@ -1,29 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SearchStatus = ({ users }) => {
-    const strNumber = String(users.length);
+const SearchStatus = (length) => {
+    const count = String(length.length);
     let phrase;
     let colorBadge;
-    if (strNumber === '0') {
+    if (count === '0') {
         colorBadge = 'badge bg-danger';
         phrase = 'Никто с тобой не тусанет сегодня';
     } else if (
-        (strNumber[strNumber.length - 1] === '2' ||
-            strNumber[strNumber.length - 1] === '3' ||
-            strNumber[strNumber.length - 1] === '4') &&
-        strNumber[strNumber.length - 2] !== '1'
+        (count[count.length - 1] === '2' ||
+            count[count.length - 1] === '3' ||
+            count[count.length - 1] === '4') &&
+        count[count.length - 2] !== '1'
     ) {
         colorBadge = 'badge bg-primary';
-        phrase = users.length + ' человека тусанут с тобой сегодня';
+        phrase = count + ' человека тусанут с тобой сегодня';
     } else {
         colorBadge = 'badge bg-primary';
-        phrase = users.length + ' человек тусанет с тобой сегодня';
+        phrase = count + ' человек тусанет с тобой сегодня';
     }
     return <span className={colorBadge}>{phrase}</span>;
 };
 
 SearchStatus.propTypes = {
-    users: PropTypes.array.isRequired
+    length: PropTypes.number
 };
 export default SearchStatus;
