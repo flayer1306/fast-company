@@ -10,42 +10,41 @@ const App = () => {
             .then((data) =>
                 setUsers(data));
     }, []);
-    if (users) {
-        const handleDelete = (userId) => {
-            setUsers((users) =>
-                users.filter((item) => item._id !== userId)
-            );
-        };
-        const handleToggleBookmark = (userId) => {
-            setUsers((prevState) =>
-                prevState.map((user) => {
-                    let newObj;
-                    if (user._id === userId) {
-                        newObj = {
-                            ...user,
-                            bookmark: !user.bookmark
-                        };
-                    } else {
-                        newObj = { ...user };
-                    }
-                    return newObj;
-                })
-            );
-        };
 
-        return (
-            <div>
-                {users && (
-                    <Users
-                        users={users}
-                        onDelete={handleDelete}
-                        onToggleBookmark={handleToggleBookmark}
-                    />
-                )
-                }
-            </div>
+    const handleDelete = (userId) => {
+        setUsers((users) =>
+            users.filter((item) => item._id !== userId)
         );
-    }
+    };
+    const handleToggleBookmark = (userId) => {
+        setUsers((prevState) =>
+            prevState.map((user) => {
+                let newObj;
+                if (user._id === userId) {
+                    newObj = {
+                        ...user,
+                        bookmark: !user.bookmark
+                    };
+                } else {
+                    newObj = { ...user };
+                }
+                return newObj;
+            })
+        );
+    };
+
+    return (
+        <div>
+            {users && (
+                <Users
+                    users={users}
+                    onDelete={handleDelete}
+                    onToggleBookmark={handleToggleBookmark}
+                />
+            )
+            }
+        </div>
+    );
 };
 
 export default App;
