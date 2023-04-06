@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import SearchStatus from './searchStatus';
-import User from './user';
 import Pagination from './pagination';
 import paginate from '../utils/paginate';
 import GroupList from './groupList';
 import PropTypes from 'prop-types';
 import api from '../api';
+import UserTable from './userTable';
+import _ from 'lodash';
 
 const Users = ({ users, ...rest }) => {
-    const pageSize = 2;
+    const pageSize = 8;
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfession] = useState();
     const [selectedProf, setSelectedProf] = useState();
+    const [sortBy, setSortBy] = useState({ iter: 'name', order: 'asc' });
 
     useEffect(() => {
         api.professions
@@ -39,11 +41,16 @@ const Users = ({ users, ...rest }) => {
             JSON.stringify(user.profession) === JSON.stringify(selectedProf))
         : users;
     const count = filteredUsers.length;
-    const userCrop = paginate(filteredUsers, currentPage, pageSize);
+    const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+    const userCrop = paginate(sortedUsers, currentPage, pageSize);
     const clearFilter = () => {
         setSelectedProf();
         setCurrentPage(1);
     };
+    const handleSort = (item) => {
+        setSortBy(item);
+    };
+
     return (
         <div className="d-flex">
             {professions && (
@@ -68,24 +75,12 @@ const Users = ({ users, ...rest }) => {
                     <SearchStatus length={count}/>
                 </h1>
                 {count > 0 && (
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Имя</th>
-                                <th scope="col">Качества</th>
-                                <th scope="col">Профессия</th>
-                                <th scope="col">Встретился, раз</th>
-                                <th scope="col">Оценка</th>
-                                <th scope="col">Избранное</th>
-                                <th/>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {userCrop.map((user) => (
-                                <User key={user._id} {...user} {...rest} />
-                            ))}
-                        </tbody>
-                    </table>
+                    <UserTable
+                        users={userCrop}
+                        {...rest}
+                        onSort={handleSort}
+                        selectedSort={sortBy}
+                    />
                 )}
                 <div className="d-flex justify-content-center">
                     <Pagination
