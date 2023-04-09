@@ -11,7 +11,7 @@ const Quality = ({ qualities }) => {
             </span>
         );
     }
-    return <td>{newArray}</td>;
+    return <>{newArray}</>;
 };
 Quality.propTypes = {
     qualities: PropTypes.array.isRequired
