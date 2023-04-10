@@ -3,26 +3,34 @@ import Quality from './quality';
 import BookMark from './bookmark';
 import PropTypes from 'prop-types';
 
-const User = (props) => {
-    // console.log(props)
+const User = ({
+    _id,
+    name,
+    qualities,
+    profession,
+    completedMeetings,
+    rate,
+    onToggleBookmark,
+    onDelete,
+    bookmark
+}) => {
     return (
-        <tr key={props._id}>
-            <td>{props.name}</td>
-            <Quality qualities={props.qualities}/>
-            <td>{props.profession.name}</td>
-            <td>{props.completedMeetings}</td>
-            <td>{props.rate}</td>
+        <tr key={_id}>
+            <td>{name}</td>
+            <Quality qualities={qualities}/>
+            <td>{profession.name}</td>
+            <td>{completedMeetings}</td>
+            <td>{rate}</td>
             <td>
                 <BookMark
-                    onToggleBookmark={props.onToggleBookmark}
-                    status={props.bookmark}
-                    id={props._id}
+                    onClick={() => onToggleBookmark(_id)}
+                    status={bookmark}
                 />
             </td>
             <td>
                 <button
                     className="btn btn-danger btn-sm m-2"
-                    onClick={() => props.onDelete(props._id)}
+                    onClick={() => onDelete(_id)}
                 >
                     Delete
                 </button>
