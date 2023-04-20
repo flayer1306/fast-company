@@ -1,9 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 const TableBody = ({ data, columns }) => {
     const renderContent = (column, item) => {
+        if (columns[column].path === 'name') {
+            return (
+                <Link className="nav-link" to={`/users/${item._id}`}>
+                    {_.get(item, columns[column].path)}
+                </Link>
+            );
+        }
         if (columns[column].component) {
             const component = columns[column].component;
             if (typeof component === 'function') {
@@ -25,7 +33,6 @@ const TableBody = ({ data, columns }) => {
                 </tr>
             ))}
         </tbody>
-
     );
 };
 
