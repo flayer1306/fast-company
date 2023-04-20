@@ -1,9 +1,7 @@
 import React from 'react';
-import Users from './app/layouts/users';
+import { Users, Login, Main } from './app/layouts';
 import { Navbar } from './app/components/navbar';
 import { Route, Switch } from 'react-router-dom';
-import { Main } from './app/layouts/main';
-import { Login } from './app/layouts/login';
 
 const App = () => {
     return (

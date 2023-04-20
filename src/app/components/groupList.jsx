@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GroupList = ({ items, valueProperty, contentProperty, onItemSelect, selectedItem }) => {
+export const GroupList = ({ items, valueProperty, contentProperty, onItemSelect, selectedItem }) => {
     if (!Array.isArray(items)) {
         return (
             <ul className="list-group">
@@ -55,5 +55,3 @@ GroupList.propTypes = {
     onItemSelect: PropTypes.func,
     selectedItem: PropTypes.object
 };
-
-export default GroupList;

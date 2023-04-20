@@ -1,9 +1,8 @@
 import React from 'react';
-import TableHeader from './tableHeader';
-import TableBody from './tableBody';
+import { TableBody, TableHeader } from './';
 import PropTypes from 'prop-types';
 
-const Table = ({ onSort, selectedSort, columns, data, children }) => {
+export const Table = ({ onSort, selectedSort, columns, data, children }) => {
     return (
         <table className="table">
             {children || (
@@ -23,4 +22,3 @@ Table.propTypes = {
     data: PropTypes.array,
     children: PropTypes.array
 };
-export default Table;

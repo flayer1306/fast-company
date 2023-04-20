@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Quality = ({ qualities }) => {
+export const Quality = ({ qualities }) => {
     const newArray = [];
     for (let i = 0; i < qualities.length; i++) {
         const colorBadge = `badge m-1 bg-${qualities[i].color}`;
@@ -16,5 +16,3 @@ const Quality = ({ qualities }) => {
 Quality.propTypes = {
     qualities: PropTypes.array.isRequired
 };
-
-export default Quality;

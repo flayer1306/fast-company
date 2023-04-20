@@ -1,8 +1,8 @@
 import React from 'react';
-import Quality from './quality';
+import { Quality } from './';
 import PropTypes from 'prop-types';
 
-const QualitiesList = ({ qualities }) => {
+export const QualitiesList = ({ qualities }) => {
     return (
         <Quality qualities={qualities}/>
     );
@@ -11,4 +11,3 @@ const QualitiesList = ({ qualities }) => {
 QualitiesList.propTypes = {
     qualities: PropTypes.array.isRequired
 };
-export default QualitiesList;

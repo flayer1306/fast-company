@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import SearchStatus from '../components/searchStatus';
-import Pagination from '../components/pagination';
 import paginate from '../utils/paginate';
-import GroupList from '../components/groupList';
+import { GroupList, SearchStatus, Pagination, UserTable, UserCard } from '../components';
 import api from '../api';
-import UserTable from '../components/userTable';
 import _ from 'lodash';
 import { useParams } from 'react-router-dom';
-import UserCard from '../components/userCard';
 
-const Users = () => {
+export const Users = () => {
     const pageSize = 8;
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfession] = useState();
@@ -137,4 +133,3 @@ const Users = () => {
     }
 };
 
-export default Users;

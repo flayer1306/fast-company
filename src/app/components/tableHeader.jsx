@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TableHeader = ({ onSort, selectedSort, columns }) => {
+export const TableHeader = ({ onSort, selectedSort, columns }) => {
     const iconStyle = selectedSort.order === 'asc' ? 'bi bi-caret-up-fill' : 'bi bi-caret-down-fill';
     const renderIconSort = (selectedSort, currentPath) => {
         if (selectedSort.path === currentPath) {
@@ -41,4 +41,3 @@ TableHeader.propTypes = {
     selectedSort: PropTypes.object.isRequired,
     columns: PropTypes.object.isRequired
 };
-export default TableHeader;

@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BookMark from './bookmark';
-import QualitiesList from './qualitiesList';
-import Table from './table';
+import { BookMark, QualitiesList, Table } from './';
 
-const UserTable = ({
+export const UserTable = ({
     users,
     onSort,
     selectedSort,
@@ -61,5 +59,3 @@ UserTable.propTypes = {
     onToggleBookmark: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired
 };
-
-export default UserTable;

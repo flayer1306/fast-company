@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import api from '../api';
-import Quality from './quality';
+import { Quality } from './';
 
-const UserCard = ({ currentId }) => {
+export const UserCard = ({ currentId }) => {
     const [currentUser, setCurrentUser] = useState();
     const history = useHistory();
     const handleReturn = () => {
@@ -48,5 +48,3 @@ const UserCard = ({ currentId }) => {
 UserCard.propTypes = {
     currentId: PropTypes.string.isRequired
 };
-
-export default UserCard;
