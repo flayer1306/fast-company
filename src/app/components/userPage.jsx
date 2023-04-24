@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import api from '../api';
 import { Quality } from './';
 
-export const UserCard = ({ currentId }) => {
+export const UserPage = ({ currentId }) => {
     const [currentUser, setCurrentUser] = useState();
     const history = useHistory();
     const handleReturn = () => {
@@ -27,7 +27,7 @@ export const UserCard = ({ currentId }) => {
                     <div className='d-flex'>
                         <Quality qualities={currentUser.qualities}/>
                     </div>
-                    <h6>completedMeetings:{currentUser.completedMeetings}</h6>
+                    <p>completedMeetings:{currentUser.completedMeetings}</p>
                     <h2>Rate: {currentUser.rate}</h2>
                     <div className='d-flex'>
                         <button className='btn btn-secondary mt-2'
@@ -45,6 +45,6 @@ export const UserCard = ({ currentId }) => {
     } return `Loading...`;
 };
 
-UserCard.propTypes = {
+UserPage.propTypes = {
     currentId: PropTypes.string.isRequired
 };

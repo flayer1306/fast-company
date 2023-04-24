@@ -9,5 +9,6 @@ export * from './table';
 export * from './tableBody';
 export * from './tableHeader';
 export * from './user';
-export * from './userCard';
+export * from './userPage';
 export * from './userTable';
+export * from './usersList';

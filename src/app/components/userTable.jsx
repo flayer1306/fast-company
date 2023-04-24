@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BookMark, QualitiesList, Table } from './';
+import { Link } from 'react-router-dom';
 
 export const UserTable = ({
     users,
@@ -10,7 +11,15 @@ export const UserTable = ({
     onDelete
 }) => {
     const columns = {
-        name: { path: 'name', name: 'Имя' },
+        name: {
+            path: 'name',
+            name: 'Имя',
+            component: (user) => (
+                <Link className="nav-link"
+                    to= {`users/${user._id}`}>{user.name}
+                </Link>
+            )
+        },
         qualities: {
             name: 'Качества',
             component: (user) => (
