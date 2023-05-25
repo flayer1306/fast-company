@@ -3,6 +3,7 @@ import paginate from '../utils/paginate';
 import { GroupList, SearchStatus, Pagination, UserTable } from './index';
 import api from '../api';
 import _ from 'lodash';
+import { Search } from './search';
 
 export const UsersList = () => {
     const pageSize = 8;
@@ -11,6 +12,7 @@ export const UsersList = () => {
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' });
     const [users, setUsers] = useState();
+    const [dataSearch, setDataSearch] = useState('');
 
     useEffect(() => {
         api.users
@@ -56,19 +58,29 @@ export const UsersList = () => {
 
     const handleProfessionSelect = item => {
         setSelectedProf(item);
+        setDataSearch('');
     };
 
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
     };
+
     if (users) {
-        const filteredUsers = selectedProf
-            ? users.filter(
+        let filteredUsers;
+        if (selectedProf) {
+            filteredUsers = users.filter(
                 (user) =>
                     JSON.stringify(user.profession) ===
-                        JSON.stringify(selectedProf)
-            )
-            : users;
+                            JSON.stringify(selectedProf)
+            );
+        } else if (dataSearch) {
+            filteredUsers = users.filter(
+                (user) =>
+                    user.name.toLowerCase().includes(dataSearch.toLowerCase())
+            );
+        } else {
+            filteredUsers = users;
+        }
         const count = filteredUsers.length;
         const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
         const userCrop = paginate(sortedUsers, currentPage, pageSize);
@@ -78,6 +90,11 @@ export const UsersList = () => {
         };
         const handleSort = (item) => {
             setSortBy(item);
+        };
+
+        const handleChangeSearch = ({ target }) => {
+            clearFilter();
+            setDataSearch(target.value);
         };
 
         return (
@@ -103,6 +120,11 @@ export const UsersList = () => {
                     <h1>
                         <SearchStatus length={count}/>
                     </h1>
+                    <Search
+                        name = 'search'
+                        onChange={handleChangeSearch}
+                        value={dataSearch}
+                    />
                     {count > 0 && (
                         <UserTable
                             users={userCrop}

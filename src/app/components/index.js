@@ -12,3 +12,4 @@ export * from './user';
 export * from './userPage';
 export * from './userTable';
 export * from './usersList';
+export * from './textField';
